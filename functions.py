@@ -2,27 +2,35 @@ import json
 
 
 def read_posts():
-    with open('posts.json', 'r', encoding='utf-8') as file:
+    with open('data/posts.json', 'r', encoding='utf-8') as file:
         posts = json.load(file)
         return posts
 
 
 def read_comments():
-    with open('comments.json', 'r', encoding='utf-8') as file:
+    with open('data/comments.json', 'r', encoding='utf-8') as file:
         comments = json.load(file)
         return comments
 
 
 def get_id(post_id):
     comments = read_comments()
-    match_id =[]
     for comment in comments:
         if post_id == comment['post_id']:
             return post_id
 
 
-# print(read_json())
+def search_post(word):
+    match_posts = []
+    posts = read_posts()
+    for post in posts:
+        if word.lower() in post['content'].lower():
+            match_posts.append(post)
+    return match_posts
 
+
+
+print(search_post('дома'))
 
 #
 # def get_hash():
@@ -56,5 +64,3 @@ def get_id(post_id):
 #     posts.append(post)
 #     with open(filename, 'w', encoding='utf-8') as file:
 #         json.dump(posts, file, ensure_ascii=False, indent=4, sort_keys=True)
-
-
