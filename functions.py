@@ -13,11 +13,21 @@ def read_comments():
         return comments
 
 
-def get_id(post_id):
+def get_post_by_id(post_id):
+    posts = read_posts()
+    for post in posts:
+        if post_id == post['pk']:
+            return post
+    return None
+
+
+def get_post_comments_by_pk(post_id):
     comments = read_comments()
+    match_comments = []
     for comment in comments:
-        if post_id == comment['post_id']:
-            return post_id
+        if comment['post_id'] == post_id:
+            match_comments.append(comment)
+    return match_comments
 
 
 def search_post(word):
@@ -29,8 +39,19 @@ def search_post(word):
     return match_posts
 
 
+# print(search_post('красиво'))
 
-print(search_post('дома'))
+
+def get_posts_by_user(username):
+    match_posts = []
+    posts = read_posts()
+    for post in posts:
+        if username == post['poster_name']:
+            match_posts.append(post)
+    return match_posts
+
+
+
 
 #
 # def get_hash():
