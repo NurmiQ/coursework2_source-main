@@ -1,12 +1,12 @@
 from flask import Flask, abort, request, render_template, send_from_directory
-from functions import read_posts, get_posts_by_user, get_post_comments_by_pk, read_comments, get_post_by_id, search_post
+from functions import read_posts, get_posts_with_comments, get_posts_by_user, get_post_comments_by_pk, read_comments, get_post_by_id, search_post
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def page_index():
-    return render_template('index.html', posts=read_posts(), comments=read_comments())
+    return render_template('index.html', posts=get_posts_with_comments(), comments=read_comments())
 
 
 @app.route("/post/<int:post_id>")
