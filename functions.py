@@ -37,6 +37,8 @@ def search_post(word):
     for post in posts:
         if word.lower() in post['content'].lower():
             match_posts.append(post)
+        else:
+            return posts
     return match_posts
 
 
