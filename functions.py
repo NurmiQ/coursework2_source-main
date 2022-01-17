@@ -34,11 +34,11 @@ def get_post_comments_by_pk(post_id):
 def search_post(word):
     match_posts = []
     posts = read_posts()
+    if word is None:
+        return posts
     for post in posts:
         if word.lower() in post['content'].lower():
             match_posts.append(post)
-        else:
-            return posts
     return match_posts
 
 
